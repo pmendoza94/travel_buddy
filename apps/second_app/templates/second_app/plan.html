@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="utf-8">
+		<title>Destination</title>
+	</head>
+	<body>
+		<header>
+			<h1>{{destination.name.id}}!</h1>
+			<table style="float: right;">
+				<tbody>
+					<td><a href="/travels">Home</a></td>
+					<td><a href="/logout">Logout</a></td>
+				</tbody>
+			</table>
+		</header>
+		{%for destination in destinations%}
+		<label>Planned By:</label>{{user.id}}
+		<label>Description:</label>{{destination.description}}
+		<label>Travel Date From:</label>{{destination.travel_date_from}}
+		<label>Travel Date To:</label>{{travel_date_to}}
+		{%endfor%}
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="utf-8">
+		<title>Add Plan</title>
+	</head>
+	<body>
+		<header>
+			<h1>Add a Trip!</h1>
+			<table style="float: right;">
+				<tbody>
+					<td><a href="/travels">Home</a></td>
+					<td><a href="/logout">Logout</a></td>
+				</tbody>
+			</table>
+		</header>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == 'error' %}
+					<p style="color: red">{{message}}</p>
+				{%endif%}
+				{% if message.tags == 'success' %}
+					<p style="color: green">{{message}}</p>
+				{%endif%}
+			{%endfor%}
+		{%endif%}
+		<form action="/addtrip" method="POST">
+		{%csrf_token%}
+			<label>Destination:</label>
+			<input type="text" name="location">
+			<br><br>
+			<label>Description:</label>
+			<input type="text" name="description">
+			<br><br>
+			<label>Travel Date From:</label>
+			<input type="text" name="travel_date_from" placeholder="yyyy-mm-dd">
+			<br><br>
+			<label>Travel Date To:</label>
+			<input type="text" name="travel_date_to" placeholder="yyyy-mm-dd">
+			<br><br>
+			<input type="hidden" name="destination" value="{{destination.id}}">
+			<input type="submit" value="Add">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="utf-8">
+		<title>Travel Dashboard</title>
+	</head>
+	<body>
+		<header>
+			<h1>Welcome, {{request.session.name}}!</h1>
+			<table style="float: right;">
+				<tbody>
+					<td><a href="/logout">Logout</a></td>
+				</tbody>
+			</table>
+		</header>
+		<br><br>
+		<h2>Your Trip Schedules</h2>
+		<table>
+			<tr>
+				<th>Destination</th>
+				<th>Travel Start Date</th>
+				<th>Travel End Date</th>
+				<th>Plan</th>
+			</tr>
+			{%for destination in destinations%}
+			<tr>
+				{%if destination.id == request.session.user_id%}
+					<td><a href="{{destination.id}}">{{destination.location}}</a></td>
+					<td>{{destination.travel_date_from}}</td>
+					<td>{{destination.travel_date_to}}</td>
+					<td>{{destination.description}}</td>
+				{%endif%}
+			</tr>
+			{%endfor%}
+		</table>
+		<br><br>
+		<h2>Other User's Travel Plans</h2>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Destination</th>
+				<th>Travel Start Date</th>
+				<th>Travel End Date</th>
+				<th>Do You Want to Join?</th>
+			</tr>
+			{%for destination in destinations%}
+				{%for user in users%}
+			<tr>
+				<!-- {%if destination.id == request.session.user_id%} -->
+				<td>{{user.name}}</td>
+				<td><a href="{{destination.id}}">{{destination.location}}</a></td>
+				<td>{{destination.travel_date_from}}</td>
+				<td>{{destination.travel_date_to}}</td>
+				<td><a href="join">Join</a></td>
+				<!-- {%endif%} -->
+			</tr>
+				{%endfor%}
+			{%endfor%}
+		</table>
+		<br><br>
+		<table style="float: right;">
+			<tbody>
+				<td><a href="/add">Add Travel Plan</a></td>
+			</tbody>
+		</table>
+	</body>
+</html>

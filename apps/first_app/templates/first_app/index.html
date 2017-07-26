@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<title>Login and Registration</title>
+	</head>
+	<body>
+		<h1>Welcome!</h1>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == 'error' %}
+					<p style="color: red">{{message}}</p>
+				{%endif%}
+				{% if message.tags == 'success' %}
+					<p style="color: green">{{message}}</p>
+				{%endif%}
+			{%endfor%}
+		{%endif%}
+		<h1>Register:</h1>
+		<form action="/register" method="post">
+		{% csrf_token %}
+			<label>Name:</label>
+			<input type="text" name="name">
+			<br><br>
+			<label>Username:</label>
+			<input type="text" name="username">
+			<br><br>
+			<label>Password:</label>
+			<input type="password" name="password">
+			<br><br>
+			<label>Confirm Password:</label>
+			<input type="password" name="con_password">
+			<br><br>
+			<input type="submit" value="Register">
+		</form>
+		<br><br>
+		<h1>Login:</h1>
+		<form action="/login" method="post">
+		{% csrf_token %}
+			<label>Username:</label>
+			<input type="text" name="username">
+			<br><br>
+			<label>Password:</label>
+			<input type="password" name="password">
+			<br><br>
+			<input type="submit" value="Login">
+		</form>
+	</body>
+</html>
